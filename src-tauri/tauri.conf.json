@@ -54,11 +54,11 @@
         },
         "windows": [
             {
-                "fullscreen": true,
-                "height": 720,
+                "fullscreen": false,
+                "height": 1080,
                 "resizable": true,
                 "title": "PassFort",
-                "width": 1080
+                "width": 1440
             }
         ]
     }
