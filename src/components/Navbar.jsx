@@ -1,8 +1,6 @@
 import React from "react";
 import Image from "next/image";
-
-import LogoSVG from "/public/rook.svg";
-import HomeSVG from "/public/home.svg";
+import Link from "next/link";
 
 export default function Navbar() {
     return (
@@ -11,9 +9,7 @@ export default function Navbar() {
             className="flex-col w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
             <div className="flex flex-col h-full px-3 py-4 overflow-y-auto bg-zinc-800">
-                <a
-                    href="https://flowbite.com/"
-                    className="flex items-center ps-2.5 mb-5">
+                <Link href="/" className="flex items-center ps-2.5 mb-5">
                     <Image
                         src="/logo.png"
                         className="w-10 h-10 me-3"
@@ -24,7 +20,7 @@ export default function Navbar() {
                     <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                         PassFort
                     </span>
-                </a>
+                </Link>
                 <ul className="flex-1 space-y-2 font-medium">
                     <li>
                         <a
