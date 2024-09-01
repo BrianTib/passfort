@@ -1,6 +1,6 @@
 # PassFort
 
-![logo](/src-tauri/icons/128x128.png)
+![logo](./src-tauri/icons/128x128.png)
 
 ## Description
 

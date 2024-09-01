@@ -8,12 +8,12 @@ export default function Navbar() {
     return (
         <aside
             id="logo-sidebar"
-            class="flex-col w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            className="flex-col w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
-            <div class="flex flex-col h-full px-3 py-4 overflow-y-auto bg-zinc-800">
+            <div className="flex flex-col h-full px-3 py-4 overflow-y-auto bg-zinc-800">
                 <a
                     href="https://flowbite.com/"
-                    class="flex items-center ps-2.5 mb-5">
+                    className="flex items-center ps-2.5 mb-5">
                     <Image
                         src="/logo.png"
                         className="w-10 h-10 me-3"
@@ -21,11 +21,11 @@ export default function Navbar() {
                         height={128}
                         alt="PassFort Logo"
                     />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                    <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                         PassFort
                     </span>
                 </a>
-                <ul class="flex-1 space-y-2 font-medium">
+                <ul className="flex-1 space-y-2 font-medium">
                     <li>
                         <a
                             href="#"
@@ -37,16 +37,16 @@ export default function Navbar() {
                                 fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zm2-3a2 2 0 1 1 4 0v3h-4zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
 
-                            <span class="flex-1 ms-3 whitespace-nowrap">
+                            <span className="flex-1 ms-3 whitespace-nowrap">
                                 Passwords
                             </span>
-                            <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium rounded-full bg-zinc-700 text-gray-300">
+                            <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium rounded-full bg-zinc-700 text-gray-300">
                                 6
                             </span>
                         </a>
@@ -62,49 +62,28 @@ export default function Navbar() {
                                 fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
 
-                            <span class="ms-3">About</span>
+                            <span className="ms-3">About</span>
                         </a>
                     </li>
-                    <div class="p-4 mt-6 rounded-lg bg-red-900">
-                        <div class="flex items-center mb-3">
-                            <span class="text-sm font-semibold me-2 px-2.5 py-0.5 rounded bg-red-200 text-red-900">
+                    <div className="p-4 mt-6 rounded-lg bg-red-900">
+                        <div className="flex items-center mb-3">
+                            <span className="text-sm font-semibold me-2 px-2.5 py-0.5 rounded bg-red-200 text-red-900">
                                 Beta
                             </span>
-                            <button
-                                type="button"
-                                class="ms-auto -mx-1.5 -my-1.5 inline-flex justify-center items-center w-6 h-6 rounded-lg focus:ring-2 focus:ring-red-400 p-1 bg-red-900 text-red-400 hover:bg-red-800"
-                                data-dismiss-target="#dropdown-cta"
-                                aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg
-                                    class="w-2.5 h-2.5"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 14 14">
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                    />
-                                </svg>
-                            </button>
                         </div>
-                        <p class="mb-3 text-sm text-red-400">
+                        <p className="mb-3 text-sm text-red-400">
                             PassFort is in beta and under active development.
                             We&apos;re adding new features and squashing bugs.
                             If you find any issues, please report them to:
                         </p>
                         <a
-                            class="text-sm underline font-medium text-red-400 hover:text-red-300"
+                            className="text-sm underline font-medium text-red-400 hover:text-red-300"
                             href="mailto:bptiburcio@gmail.com&subject=I%20found%20a%20bug!">
                             bptiburcio@gmail.com
                         </a>
@@ -124,11 +103,11 @@ export default function Navbar() {
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M18.113 13.03a6 6 0 0 0 .057-.806c0-.28-.025-.542-.057-.806l1.735-1.357a.415.415 0 0 0 .099-.526l-1.645-2.846a.41.41 0 0 0-.502-.18l-2.048.822a6 6 0 0 0-1.39-.806l-.312-2.18A.4.4 0 0 0 13.647 4h-3.29a.4.4 0 0 0-.403.345l-.313 2.18a6.3 6.3 0 0 0-1.39.806l-2.047-.823a.4.4 0 0 0-.502.181L4.057 9.535a.405.405 0 0 0 .099.526l1.735 1.357a7 7 0 0 0-.058.806c0 .272.025.543.058.806l-1.735 1.357a.415.415 0 0 0-.099.527l1.645 2.845c.099.181.32.247.502.181l2.047-.822q.64.495 1.39.806l.313 2.18a.4.4 0 0 0 .403.345h3.29a.4.4 0 0 0 .403-.346l.312-2.179a6.3 6.3 0 0 0 1.39-.806l2.048.822c.19.074.403 0 .502-.18l1.645-2.846a.415.415 0 0 0-.1-.527zm-6.111 2.073a2.88 2.88 0 0 1-2.879-2.879 2.88 2.88 0 0 1 2.879-2.878 2.88 2.88 0 0 1 2.878 2.878 2.88 2.88 0 0 1-2.878 2.879"
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                 />
                             </svg>
 
-                            <span class="ms-3">Settings</span>
+                            <span className="ms-3">Settings</span>
                         </a>
                     </li>
                 </ul>
