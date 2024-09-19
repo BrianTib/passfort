@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Poppins } from "next/font/google";
 import Navbar from "#/components/Navbar";
+import type { Metadata } from "next";
+import { ReactQueryProvider } from "#/context/ReactQuery";
 
 const poppins = Poppins({ weight: "300", subsets: ["latin"] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={`${poppins.className} flex bg-zinc-900 text-white`}>
-                <Navbar />
-                {children}
+                <ReactQueryProvider>
+                    <Navbar />
+                    {children}
+                </ReactQueryProvider>
             </body>
         </html>
     );

@@ -1,61 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Dialog } from "#/components/Dialog";
-
-function EyeIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round">
-            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-            <circle cx="12" cy="12" r="3" />
-        </svg>
-    );
-}
-
-function UnlockIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24">
-            <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 14v3m4-6V7a3 3 0 1 1 6 0v4M5 11h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"
-            />
-        </svg>
-    );
-}
-
-function TrashIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round">
-            <path d="M3 6h18" />
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-        </svg>
-    );
-}
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function ListPassword({
     name,
@@ -140,37 +88,38 @@ function ListPassword({
 }
 
 export default function Home() {
-    const [generatedMasterPassword, setGeneratedMasterPassword] = useState("");
+    const [generatedMasterPassword, setGeneratedMasterPassword] =
+        useState<string>();
     const [copySuccess, setCopySuccess] = useState(false);
+
+    const getGeneratedPasswordQuery = useQuery({
+        queryKey: ["generate-password"],
+        queryFn: async () => {
+            // TODO: Add optional query parameter for password length
+            const request = await axios.get("/api/generate-password");
+
+            if (request.data?.password) {
+                setGeneratedMasterPassword(request.data.password);
+            }
+
+            return request;
+        },
+    });
 
     const getPassword = (name: string): string => {
         return `password for ${name}`;
     };
 
-    const generateRandomMasterKey = () => {
-        const length = 16; // Define the length of the master password
-        const charset =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
-        let masterKey = "";
-
-        for (let i = 0; i < length; i++) {
-            const randomIndex = Math.floor(Math.random() * charset.length); // Randomly select a character from the charset
-            masterKey += charset[randomIndex]; // Append the character to the master key
+    const handleCopy = () => {
+        if (!generatedMasterPassword) {
+            return;
         }
 
-        setGeneratedMasterPassword(masterKey);
-    };
-
-    const handleCopy = () => {
         navigator.clipboard.writeText(generatedMasterPassword).then(() => {
             setCopySuccess(true); // Show success message
             setTimeout(() => setCopySuccess(false), 2000); // Hide after 2 seconds
         });
     };
-
-    useEffect(() => {
-        generateRandomMasterKey();
-    }, []);
 
     return (
         <main className="flex-1 p-4">
@@ -231,7 +180,18 @@ export default function Home() {
                 </div>
 
                 <div className="p-4 mt-6 rounded-lg bg-zinc-800">
-                    <h3>Generated Master Password</h3>
+                    <div className="flex gap-2">
+                        <h3 className="text-lg">Generated Master Password</h3>
+
+                        {copySuccess && (
+                            <div className="flex items-center">
+                                <span className="font-semibold me-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">
+                                    Copied!
+                                </span>
+                            </div>
+                        )}
+                    </div>
+
                     <div className="flex items-center gap-2 mt-2">
                         <div
                             className={`flex items-center px-2 rounded-lg border-2 ${
@@ -240,12 +200,11 @@ export default function Home() {
                                     : "border-zinc-500"
                             } focus:outline-none`}>
                             <input
-                                className={`bg-transparent w-fit min-w-48 h-8 p-2 ${
+                                className={`bg-transparent w-fit min-w-96 h-8 p-2 ${
                                     copySuccess
                                         ? "text-green-500"
                                         : "text-zinc-500"
                                 } font-semibold`}
-                                type="text"
                                 value={generatedMasterPassword}
                                 disabled={true}
                             />
@@ -274,7 +233,9 @@ export default function Home() {
 
                             <button
                                 className="flex p-1 rounded"
-                                onClick={generateRandomMasterKey}>
+                                onClick={() =>
+                                    getGeneratedPasswordQuery.refetch()
+                                }>
                                 <svg
                                     className={`w-6 h-6 ${
                                         copySuccess
@@ -308,5 +269,59 @@ export default function Home() {
                 </div>
             </section>
         </main>
+    );
+}
+
+function EyeIcon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+            <circle cx="12" cy="12" r="3" />
+        </svg>
+    );
+}
+
+function UnlockIcon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            {...props}
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24">
+            <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 14v3m4-6V7a3 3 0 1 1 6 0v4M5 11h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"
+            />
+        </svg>
+    );
+}
+
+function TrashIcon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round">
+            <path d="M3 6h18" />
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+        </svg>
     );
 }

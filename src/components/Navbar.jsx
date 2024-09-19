@@ -43,7 +43,7 @@ export default function Navbar() {
                                 Passwords
                             </span>
                             <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium rounded-full bg-zinc-700 text-gray-300">
-                                6
+                                3
                             </span>
                         </a>
                     </li>
