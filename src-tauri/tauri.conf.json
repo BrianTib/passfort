@@ -1,71 +1,64 @@
 {
-    "build": {
-        "beforeBuildCommand": "npm run build",
-        "beforeDevCommand": "npm run dev",
-        "withGlobalTauri": true,
-        "devPath": "http://localhost:3000",
-        "distDir": "../out"
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:3000",
+    "frontendDist": "../out"
+  },
+  "bundle": {
+    "active": true,
+    "category": "DeveloperTool",
+    "copyright": "",
+    "targets": "all",
+    "externalBin": [],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
     },
-    "package": {
-        "productName": "passfort",
-        "version": "0.1.0"
+    "longDescription": "Keep your passwords safe with PassFort",
+    "macOS": {
+      "entitlements": null,
+      "exceptionDomain": "",
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null
     },
-    "tauri": {
-        "allowlist": {
-            "all": true,
-            "fs": {
-                "scope": ["**"]
-            }
-        },
-        "bundle": {
-            "active": true,
-            "category": "DeveloperTool",
-            "copyright": "",
-            "deb": {
-                "depends": []
-            },
-            "externalBin": [],
-            "icon": [
-                "icons/32x32.png",
-                "icons/128x128.png",
-                "icons/128x128@2x.png",
-                "icons/icon.icns",
-                "icons/icon.ico"
-            ],
-            "identifier": "PassFort",
-            "longDescription": "Keep your passwords safe with PassFort",
-            "macOS": {
-                "entitlements": null,
-                "exceptionDomain": "",
-                "frameworks": [],
-                "providerShortName": null,
-                "signingIdentity": null
-            },
-            "resources": [],
-            "shortDescription": "",
-            "targets": "all",
-            "windows": {
-                "certificateThumbprint": null,
-                "digestAlgorithm": "sha256",
-                "timestampUrl": ""
-            }
-        },
-        "security": {
-            "csp": null
-        },
-        "updater": {
-            "active": false
-        },
-        "windows": [
-            {
-                "fullscreen": false,
-                "height": 1080,
-                "resizable": true,
-                "title": "PassFort",
-                "width": 1440,
-                "minWidth": 1440,
-                "minHeight": 1080
-            }
-        ]
+    "resources": [],
+    "shortDescription": "",
+    "linux": {
+      "deb": {
+        "depends": []
+      }
     }
+  },
+  "productName": "passfort",
+  "mainBinaryName": "passfort",
+  "version": "0.1.0",
+  "identifier": "PassFort",
+  "plugins": {},
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 1080,
+        "resizable": true,
+        "title": "PassFort",
+        "width": 1440,
+        "minWidth": 1440,
+        "minHeight": 1080
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  }
 }

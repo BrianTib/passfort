@@ -22,6 +22,12 @@
             "$/*": ["./*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "src-tauri/src/main.trs"
+    ],
     "exclude": ["node_modules", "src-tauri", "ignore"]
 }

@@ -1,9 +1,9 @@
 use aes_gcm::{
     aead::{Aead, KeyInit},
-    Aes256Gcm, Nonce
+    Aes256Gcm, Nonce,
 };
-use rand::RngCore;
 use pbkdf2::pbkdf2_hmac;
+use rand::RngCore;
 use sha2::Sha256;
 
 /*
@@ -16,7 +16,6 @@ use sha2::Sha256;
     ciphertexts. The key is never stored and is derived from the password every time the data is
     decrypted. This ensures that the key is not exposed to brute force attacks.
 */
-
 
 // The salt is important because it ensures that the same password will generate different keys
 const SALT_LENGTH: usize = 32;
@@ -62,16 +61,16 @@ pub fn generate_master_password(length: Option<u8>) -> String {
 #[tauri::command]
 pub fn encrypt(data: String, master_password: String) -> Result<String, String> {
     let mut rng = rand::thread_rng();
-    
+
     // Create a random salt to be used in the key derivation
     let mut salt = [0u8; SALT_LENGTH];
     rng.fill_bytes(&mut salt);
-    
+
     // Derive a key from the master password and the salt
     let key = derive_key(&master_password, &salt);
     // Create a cipher from the key to encrypt the data
-    let cipher = Aes256Gcm::new_from_slice(&key)
-        .map_err(|e| format!("Failed to create cipher: {}", e))?;
+    let cipher =
+        Aes256Gcm::new_from_slice(&key).map_err(|e| format!("Failed to create cipher: {}", e))?;
 
     // Create a random nonce to be used in the encryption
     let mut nonce = [0u8; NONCE_LENGTH];
@@ -79,7 +78,8 @@ pub fn encrypt(data: String, master_password: String) -> Result<String, String> 
     let nonce = Nonce::from_slice(&nonce);
 
     // Encrypt the data using the cipher and the nonce
-    let ciphertext = cipher.encrypt(nonce, data.as_bytes())
+    let ciphertext = cipher
+        .encrypt(nonce, data.as_bytes())
         .map_err(|e| format!("Encryption failed: {}", e))?;
 
     Ok(hex_encode(&salt) + &hex_encode(nonce.as_ref()) + &hex_encode(&ciphertext))
@@ -88,9 +88,9 @@ pub fn encrypt(data: String, master_password: String) -> Result<String, String> 
 #[tauri::command]
 pub fn decrypt(encrypted_data: String, master_password: String) -> Result<String, String> {
     // Decode the encrypted data from a hexadecimal string to a byte array
-    let encrypted_bytes = hex_decode(&encrypted_data)
-        .map_err(|e| format!("Invalid encrypted data: {}", e))?;
-    
+    let encrypted_bytes =
+        hex_decode(&encrypted_data).map_err(|e| format!("Invalid encrypted data: {}", e))?;
+
     // Ensure that the encrypted data is long enough to contain the salt, nonce, and ciphertext
     if encrypted_bytes.len() < SALT_LENGTH + NONCE_LENGTH {
         return Err("Encrypted data is too short".to_string());
@@ -102,15 +102,15 @@ pub fn decrypt(encrypted_data: String, master_password: String) -> Result<String
 
     // Decode the salt, nonce, and ciphertext from hexadecimal strings to byte arrays
     let key = derive_key(&master_password, salt);
-    let cipher = Aes256Gcm::new_from_slice(&key)
-        .map_err(|e| format!("Failed to create cipher: {}", e))?;
+    let cipher =
+        Aes256Gcm::new_from_slice(&key).map_err(|e| format!("Failed to create cipher: {}", e))?;
 
     let nonce = Nonce::from_slice(nonce);
 
     // Decrypt the data using the cipher and the nonce
-    let plaintext = cipher.decrypt(nonce, ciphertext)
+    let plaintext = cipher
+        .decrypt(nonce, ciphertext)
         .map_err(|e| format!("Decryption failed: {}", e))?;
 
-    String::from_utf8(plaintext)
-        .map_err(|e| format!("Invalid UTF-8 in decrypted data: {}", e))
+    String::from_utf8(plaintext).map_err(|e| format!("Invalid UTF-8 in decrypted data: {}", e))
 }
