@@ -1,13 +1,13 @@
 [package]
-name = "app"
+name = "passfort"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "PassFort is an offline open-source desktop application for keeping track your various passwords throughout the internet"
+authors = ["Brian T. <bptiburcio@gmail.com>"]
 license = ""
 repository = ""
-default-run = "app"
+default-run = "passfort"
 edition = "2021"
-rust-version = "1.60"
+rust-version = "1.70"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -17,7 +17,11 @@ tauri-build = { version = "1.5.5", features = [] }
 [dependencies]
 serde_json = "1.0.128"
 serde = { version = "1.0.210", features = ["derive"] }
-tauri = { version = "1.8.0", features = [ "fs-read-file", "fs-read-dir", "fs-write-file", "fs-exists", "fs-remove-file"] }
+tauri = { version = "1.8.0", features = [ "api-all"] }
+aes-gcm = "0.10.3"
+rand = "0.8.5"
+pbkdf2 = "0.12.2"
+sha2 = "0.10.8"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

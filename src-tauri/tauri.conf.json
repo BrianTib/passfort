@@ -12,13 +12,9 @@
     },
     "tauri": {
         "allowlist": {
+            "all": true,
             "fs": {
-                "all": false,
-                "readFile": true,
-                "writeFile": true,
-                "readDir": true,
-                "removeFile": true,
-                "exists": true
+                "scope": ["**"]
             }
         },
         "bundle": {
@@ -36,7 +32,7 @@
                 "icons/icon.icns",
                 "icons/icon.ico"
             ],
-            "identifier": "com.passfort.dev",
+            "identifier": "PassFort",
             "longDescription": "Keep your passwords safe with PassFort",
             "macOS": {
                 "entitlements": null,

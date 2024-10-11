@@ -1,43 +1,42 @@
 import {
-    exists as existsInner,
-    readDir as readDirInner,
-    type FsDirOptions,
-    writeBinaryFile as writeBinaryFileInner,
+    writeBinaryFile,
+    readBinaryFile,
+    createDir,
+    BaseDirectory,
+    exists,
 } from "@tauri-apps/api/fs";
 
-/* FS OVERRIDES START */
+import { type Password } from "#/types/password";
 
-export async function readTextFile(fileName: string, options: FsDirOptions) {
-    if (fileName.length <= 0) {
-        throw new Error("File name is empty");
+const KEYS_FILE = "5b35d5cc-d9b4-4e08-8cd7-b27daf96fdc6.bin";
+
+async function ensureAppDataDirectoryExists() {
+    const appDataExists = await exists("", { dir: BaseDirectory.AppData });
+    if (!appDataExists) {
+        await createDir("", { dir: BaseDirectory.AppData, recursive: true });
     }
-
-    return readTextFile(fileName, options);
 }
 
-export async function writeTextFile(
-    fileName: string,
-    data: string,
-    options: FsDirOptions
-) {
-    if (fileName.length <= 0) {
-        throw new Error("File name is empty");
-    }
+export async function getStoredPasswords(): Promise<Password[]> {
+    await ensureAppDataDirectoryExists();
 
-    return writeTextFile(fileName, data, options);
+    const fileExists = await exists(KEYS_FILE, { dir: BaseDirectory.AppData });
+    if (!fileExists) return [];
+
+    const buffer = await readBinaryFile(KEYS_FILE, {
+        dir: BaseDirectory.AppData,
+    });
+    return JSON.parse(new TextDecoder().decode(buffer)) as Password[];
 }
 
-export async function writeBinaryFile(
-    fileName: string,
-    data: Uint8Array,
-    options: FsDirOptions
-) {
-    if (fileName.length <= 0) {
-        throw new Error("File name is empty");
-    }
-    return writeBinaryFileInner(fileName, data, options);
-}
+export async function setStoredPasswords(passwords: Password[]) {
+    await ensureAppDataDirectoryExists();
 
-export async function exists(fileName: string, options: FsDirOptions) {
-    return existsInner(fileName, options);
+    const data = new TextEncoder().encode(JSON.stringify(passwords));
+    await writeBinaryFile(
+        { path: KEYS_FILE, contents: data },
+        {
+            dir: BaseDirectory.AppData,
+        }
+    );
 }
