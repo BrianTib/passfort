@@ -1,13 +1,12 @@
 [package]
-name = "passfort"
+name = "PassFort"
 version = "0.1.0"
 description = "PassFort is an offline open-source desktop application for keeping track your various passwords throughout the internet"
 authors = ["Brian T. <bptiburcio@gmail.com>"]
-license = ""
-repository = ""
-default-run = "passfort"
+license = "MIT"
+repository = "https://github.com/BrianTib/passfort"
 edition = "2021"
-rust-version = "1.70"
+rust-version = "1.81.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]

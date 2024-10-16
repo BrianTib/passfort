@@ -48,13 +48,20 @@ fn derive_key(master_password: &str, salt: &[u8]) -> [u8; KEY_LENGTH] {
     key
 }
 
-#[tauri::command]
 // Genereate a random master password for the client
+#[tauri::command]
 pub fn generate_master_password(length: Option<u8>) -> String {
+    // Determine the length of the master password
+    // The user can give a desired length, but we ensure that
+    // the length is between 8 and 64 characters for convenience
     let length = length.unwrap_or(8).max(8).min(64) as usize;
+
     let mut rng = rand::thread_rng();
     let mut bytes = vec![0u8; length];
+    // Fill the byte array with random bytes
     rng.fill_bytes(&mut bytes);
+    
+    // Return the byte array as a hexadecimal string
     hex_encode(&bytes)
 }
 

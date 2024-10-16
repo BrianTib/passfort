@@ -4,8 +4,9 @@
 
 ## Description
 
-PassFort is an offline open-source desktop application for keeping track your various passwords throughout the internet
+PassFort is an offline open-source password management desktop application for keeping track your various passwords
 
-## Ideas
+## Features
 
-When storing the password in memory, encrypt it using a formatted key something like passfort-{number}. The number should be such that it makes mathematical sense for the duration the master password should be stored in memory. This would make it so that the key does not need to be stored in memory (or elsewhere) and can be deduced logically by time plus when the user requested to momentarily store it. Perhaps a UNIX stamp truncated by some interval?
+-   **Unlimited Password Storage**: Store as many passwords as you need without having to worry about subscriptions or storing passwords on the cloud.
+-   **Built in encryption**: Your passwords are encrypted by default. You can further protect your passwords using a master password which you can store separatedly from the app.

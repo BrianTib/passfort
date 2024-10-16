@@ -6,28 +6,28 @@ export default function Navbar() {
     return (
         <aside
             id="logo-sidebar"
-            className="flex-col w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            className="group flex-col w-20 hover:w-64 h-screen transition-all ease-linear delay-150 motion-reduce:transition-none motion-reduce:hover:transform-none"
             aria-label="Sidebar">
-            <div className="flex flex-col h-full px-3 py-4 overflow-y-auto bg-zinc-800">
+            <div className="flex flex-col h-full px-3 py-4 overflow-x-hidden overflow-y-auto bg-passfort">
                 <Link href="/" className="flex items-center ps-2.5 mb-5">
                     <Image
                         src="/logo.png"
-                        className="w-10 h-10 me-3"
+                        className="w-10 h-10 me-6 group-hover:scale-[1.35] transition duration-150 ease-in-out motion-reduce:transition-none"
                         width={128}
                         height={128}
                         alt="PassFort Logo"
                     />
-                    <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                    <span className="overflow-hidden translate-x-full group-hover:transform-none transition duration-200 self-center text-3xl font-extrabold whitespace-nowrap text-white">
                         PassFort
                     </span>
                 </Link>
-                <ul className="flex-1 space-y-2 font-medium">
+                <ul className="opacity-0 translate-y-2/6 group-hover:opacity-100 group-hover:translate-y-0 transition ease-in-out delay-200 flex-1 space-y-2 font-medium">
                     <li>
-                        <a
-                            href="#"
-                            className="flex items-center p-2 rounded-lg text-white hover:bg-zinc-700 group">
+                        <Link
+                            href="/"
+                            className="flex items-center p-2 rounded-lg text-passfort-vibrant font-bold text-lg border border-passfort-vibrant">
                             <svg
-                                className="flex-shrink-0 w-8 h-8 transition duration-75 text-red-400 group-hover:text-white"
+                                className="flex-shrink-0 w-8 h-8 transition duration-75 text-passfort-vibrant"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -42,17 +42,17 @@ export default function Navbar() {
                             <span className="flex-1 ms-3 whitespace-nowrap">
                                 Passwords
                             </span>
-                            <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium rounded-full bg-zinc-700 text-gray-300">
+                            <span className="inline-flex items-center justify-center w-5 h-5 text-sm font-medium rounded-full bg-passfort-vibrant text-white">
                                 3
                             </span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            className="flex items-center p-2 rounded-lg text-white hover:bg-zinc-700 group">
+                        <Link
+                            href="/about"
+                            className="flex items-center p-2 rounded-lg text-passfort-vibrant font-bold text-lg border border-passfort-vibrant">
                             <svg
-                                className="flex-shrink-0 w-8 h-8 text-red-400 transition duration-75 group-hover:text-white"
+                                className="flex-shrink-0 w-8 h-8 transition duration-75 text-passfort-vibrant"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -64,12 +64,12 @@ export default function Navbar() {
                                 />
                             </svg>
 
-                            <span className="ms-3">About</span>
-                        </a>
+                            <span className="ms-3">About Us</span>
+                        </Link>
                     </li>
-                    <div className="p-4 mt-6 rounded-lg bg-red-900">
+                    <div className="p-4 mt-6 rounded-lg border border-passfort-vibrant bg-passfort-vibrant/25">
                         <div className="flex items-center mb-3">
-                            <span className="text-sm font-semibold me-2 px-2.5 py-0.5 rounded bg-red-200 text-red-900">
+                            <span className="text-sm font-semibold me-2 px-2.5 py-0.5 rounded bg-red-200 text-red-800">
                                 Beta
                             </span>
                         </div>
@@ -79,20 +79,20 @@ export default function Navbar() {
                             If you find any issues, please report them to:
                         </p>
                         <a
-                            className="text-sm underline font-medium text-red-400 hover:text-red-300"
+                            className="text-sm underline font-medium text-red-200 hover:text-white"
                             href="mailto:bptiburcio@gmail.com&subject=I%20found%20a%20bug!">
                             bptiburcio@gmail.com
                         </a>
                     </div>
                 </ul>
 
-                <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-zinc-700">
+                <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-passfort-vibrant">
                     <li>
-                        <a
-                            href="#"
-                            className="flex items-center p-2 rounded-lg text-white hover:bg-zinc-700 group">
+                        <Link
+                            href="/settings"
+                            className="flex items-center p-2 h-12 rounded-lg text-passfort-vibrant font-bold text-lg border border-passfort-vibrant group hover:justify-start transition-all duration-300 ease-in-out relative">
                             <svg
-                                className="flex-shrink-0 w-8 h-8 text-red-400 transition duration-75 group-hover:text-white"
+                                className="w-8 h-8 flex-shrink-0 text-passfort-vibrant absolute left-[0.65rem] group-hover:relative group-hover:left-1"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
@@ -103,27 +103,13 @@ export default function Navbar() {
                                 />
                             </svg>
 
-                            <span className="ms-3">Settings</span>
-                        </a>
+                            <span className="ms-3 w-0 overflow-hidden whitespace-nowrap group-hover:w-auto transition-all duration-300 ease-in-out">
+                                Settings
+                            </span>
+                        </Link>
                     </li>
                 </ul>
             </div>
         </aside>
-
-        // <aside className="flex flex-col py-4 px-8 gap-2 bg-zinc-800">
-        //     <div className="flex items-center gap-2 mb-4">
-        //         <LogoSVG className="w-12 h-12" />
-        //         <h1 className="text-2xl font-bold">PassFort</h1>
-        //     </div>
-        //     <ul className="text-lg text-white">
-        //         <li className="flex items-center gap-2">
-        //             <HomeSVG className="w-8 h-8" />
-        //             Home
-        //         </li>
-        //         <li>Services</li>
-        //         <li>About</li>
-        //         <li>Contact</li>
-        //     </ul>
-        // </aside>
     );
 }

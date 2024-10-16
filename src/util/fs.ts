@@ -23,6 +23,7 @@ export async function getStoredPasswords(): Promise<Password[]> {
     const fileExists = await exists(KEYS_FILE, {
         baseDir: BaseDirectory.AppData,
     });
+
     if (!fileExists) return [];
 
     const buffer = await readFile(KEYS_FILE, {
