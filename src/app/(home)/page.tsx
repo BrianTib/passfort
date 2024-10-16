@@ -91,7 +91,7 @@ function AddPasswordPanel() {
 
     const test = async () => {
         const storedPasswords = await getStoredPasswords();
-        console.log("Reading stored:", { storedPasswords });
+        //console.log("Reading stored:", { storedPasswords });
 
         // await addPassword({
         //     name: "Google",
@@ -180,9 +180,9 @@ function PasswordsPanel({
                         fill="currentColor"
                         viewBox="0 0 24 24">
                         <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                         />
                     </svg>
                 </button>
@@ -391,14 +391,14 @@ function MasterPasswordPanel() {
                         fill="currentColor"
                         viewBox="0 0 24 24">
                         <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                         />
                         <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M8 7.054V11H4.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 8 7.054ZM10 7v4a2 2 0 0 1-2 2H4v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                         />
                     </svg>
                 </button>
@@ -429,9 +429,9 @@ function MasterPasswordPanel() {
                         fill="currentColor"
                         viewBox="0 0 24 24">
                         <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7.414A2 2 0 0 0 20.414 6L18 3.586A2 2 0 0 0 16.586 3H5Zm10 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7V5h8v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                         />
                     </svg>
                 </button>
